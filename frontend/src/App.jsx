@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-const API='http://localhost:5001/api';
+const API='https://fresher-job-portal.onrender.com/api';
 async function request(path,{method='GET',body,token}={}){const res=await fetch(API+path,{method,headers:{'Content-Type':'application/json',...(token?{Authorization:`Bearer ${token}`}:{})},...(body?{body:JSON.stringify(body)}:{})});const data=await res.json().catch(()=>({message:'Invalid server response'}));if(!res.ok)throw Error(data.message||'Request failed');return data}
 const blank={title:'',company:'',location:'',type:'Full-time',salary:'',description:''};
 export default function App(){const [token,setToken]=useState(localStorage.getItem('jobToken')||'');const[user,setUser]=useState(null);const[mode,setMode]=useState('login');const[authForm,setAuthForm]=useState({name:'',email:'',password:'',role:'student'});const[jobs,setJobs]=useState([]);const[query,setQuery]=useState('');const[jobForm,setJobForm]=useState(blank);const[editing,setEditing]=useState(null);const[apps,setApps]=useState([]);const[notice,setNotice]=useState('');const[busy,setBusy]=useState(false);
